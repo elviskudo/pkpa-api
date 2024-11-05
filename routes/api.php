@@ -9,5 +9,7 @@ Route::get('/', function () {
 Route::prefix('auth')->name('auth.')->namespace('Auth')->group(function () {
 });
 
+Route::prefix('home')->name('home.')->group(function () {
+});
 Route::prefix('admin')->name('admin.')->middleware(['auth:jwt'])->group(function () {
 });
