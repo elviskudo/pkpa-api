@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('file_type');
             $table->string('file_url');
-            $table->timestamps('upload_at');
+            $table->timestamp('upload_at')->nullable();
             $table->foreignId('reviewed_by')->constrained('teachers');
-            $table->timestamp('reviewed_at');
+            $table->timestamp('reviewed_at')->nullable();
             $table->foreignId('approved_by')->constrained('teachers');
-            $table->timestamp('approved_at');
+            $table->timestamp('approved_at')->nullable();
             $table->foreignId('rejected_by')->constrained('teachers');
-            $table->timestamp('rejected_at');
+            $table->timestamp('rejected_at')->nullable();
         });
     }
 

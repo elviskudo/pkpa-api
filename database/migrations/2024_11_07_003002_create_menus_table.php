@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menus_', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id(); // ID menu
             $table->uuid('uuid')->unique();
             $table->string('name');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('url');
             $table->string('icon')->nullable();
             $table->foreignId('parent_id')->nullable()->constrained('menus')->onDelete('cascade'); // Kunci asing untuk parent menu
-            $table->timestamps(); 
+            $table->timestamps();
         });
     }
 

@@ -17,10 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->date('start_date');
-            $table->end_date('end_date');
+            $table->date('end_date');
             $table->boolean('is_active')->default(true);
-            $table->timestamps();
-            $table->integer('order')->default(1); 
+            $table->integer('order')->default(true);
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
             $table->string('video_url')->nullable();
             $table->string('image_url')->nullable();
