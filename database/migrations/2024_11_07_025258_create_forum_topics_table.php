@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('forum_topics', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
             $table->uuid('user_id');
             $table->foreign('user_id')->references('uuid')->on('users');
             $table->foreignId('university_id')->constrained('universities');

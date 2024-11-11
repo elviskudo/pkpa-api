@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('quiz_by_content', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
             $table->foreignId('content_id')->constrained('contents')->onDelete('cascade');
             $table->text('quetion');
             $table->boolean('random')->default(true);

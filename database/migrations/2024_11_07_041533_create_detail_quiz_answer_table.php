@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('detail_quiz_answer', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
             $table->foreignId('quiz_id')->constrained('quizzes')->onDelete('cascade');
             $table->foreignId('question')->constrained('questions')->onDelete('cascade');
             $table->foreignId('answer_id')->constrained('answers')->onDelete('cascade');

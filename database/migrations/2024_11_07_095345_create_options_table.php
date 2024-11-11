@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->foreignId('quiz_content_id')->constrained('quiz_by_content')->onDelete('cascade');
+            $table->uuid('uuid')->unique();
+            $table->foreignId('quiz_by_content_id')->constrained('quiz_by_content')->onDelete('cascade');
             $table->string('option');
             $table->timestamps();
         });
