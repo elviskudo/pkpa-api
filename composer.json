@@ -9,6 +9,7 @@
         "ext-exif": "*",
         "ext-json": "*",
         "ext-pdo": "*",
+        "cloudinary-labs/cloudinary-laravel": "^2.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
