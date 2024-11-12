@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Http\Requests\PaginateRequest;
 use App\Models\University;
 
-class UniversityService
+class UniversityServices
 {
     public $addressFilter = ['name', 'code'];
 
