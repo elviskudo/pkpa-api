@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->uuid('user_id');
-            $table->foreign('user_id')->references('uuid')->on('users');
-            $table->foreignId('topic_id')->constrained('forum_topics');
+            $table->uuid('created_by');
+            $table->foreign('created_by')->references('uuid')->on('users');
+            $table->uuid('forum_id');
+            $table->foreign('forum_id')->references('uuid')->on('forums')->onDelete('cascade');
             $table->text('content');
-            $table->integer('like_count');
-            $table->integer('dislike_count');
+            $table->integer('like_count')->default(0);
+            $table->integer('dislike_count')->default(0);
             $table->timestamps();
         });
     }

@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('batch_groups', function (Blueprint $table) {
-            $table->id(); 
+        Schema::create('quiz_by_contents', function (Blueprint $table) {
+            $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('topic_id')->constrained('topics')->onDelete('cascade');
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->boolean('is_active')->default(true);
+            $table->foreignId('content_id')->constrained('contents')->onDelete('cascade');
+            $table->text('question');
+            $table->boolean('random')->default(true);
             $table->integer('order')->default(1);
+            $table->boolean('is_active')->default(true);
+            $table->timestamps();
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('batch_groups');
+        Schema::dropIfExists('quiz_by_contents');
     }
 };

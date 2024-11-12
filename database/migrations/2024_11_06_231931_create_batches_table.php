@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('batches_', function (Blueprint $table) {
+        Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->uuid('topic_id');
+            $table->foreign('topic_id')->references('uuid')->on('topics')->onDelete('cascade');
             $table->string('name');
             $table->text('description');
-            $table->string('video_url');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->boolean('is_active');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->integer('order')->default(1);
             $table->timestamps();
         });

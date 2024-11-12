@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('forum_topics', function (Blueprint $table) {
+        Schema::create('forums', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->uuid('user_id');
-            $table->foreign('user_id')->references('uuid')->on('users');
-            $table->foreignId('university_id')->constrained('universities');
+            $table->uuid('created_by');
+            $table->foreign('created_by')->references('uuid')->on('users');
+            $table->uuid('university_id');
+            $table->foreign('university_id')->references('uuid')->on('universities');
             $table->string('title');
             $table->text('content');
             $table->string('image_url')->nullable();
-            $table->integer('like_count');
-            $table->integer('dislike_count');
+            $table->integer('like_count')->default(0);
+            $table->integer('dislike_count')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('forum_topics_');
+        Schema::dropIfExists('forums');
     }
 };

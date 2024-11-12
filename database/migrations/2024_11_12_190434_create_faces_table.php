@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('options', function (Blueprint $table) {
+        Schema::create('faces', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid')->unique();
-            $table->foreignId('quiz_by_content_id')->constrained('quiz_by_content')->onDelete('cascade');
-            $table->string('option');
-            $table->boolean('is_answered')->default(false);
+            $table->uuid('uuid');
+            $table->uuid('student_id');
+            $table->foreign('student_id')->references('uuid')->on('students')->onDelete('cascade');
+            $table->string('image_url');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('options');
+        Schema::dropIfExists('faces');
     }
 };

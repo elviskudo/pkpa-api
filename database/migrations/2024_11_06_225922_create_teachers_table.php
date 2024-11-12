@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('university_id')->constrained('universities')->onDelete('cascade');
             $table->uuid('uuid')->unique();
+            $table->uuid('university_id');
+            $table->foreign('university_id')->references('uuid')->on('universities')->onDelete('cascade');
             $table->string('name');
             $table->string('nik')->unique();
             $table->string('code')->unique();
