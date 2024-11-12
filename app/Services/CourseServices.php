@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Services;
+use App\Models\Course;
 
-class AddressService
+class CourseServices
 {
-    public $addressFilter = ['label', 'address', 'apartment', 'latitude', 'longitude'];
+    public $courseFilter = ['name', 'category_id'];
 
     /**
      * @throws Exception
      */
     public function list(PaginateRequest $request)
     {
-        
+
     }
+
 }
