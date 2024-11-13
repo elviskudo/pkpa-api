@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('quiz_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
             $table->uuid('uuid')->unique();
+            $table->uuid('student_id');
+            $table->foreign('student_id')->references('uuid')->on('students')->onDelete('cascade');
             $table->dateTime('quiz_start');
             $table->dateTime('quiz_end');
-            $table->integer('questions_count');
-            $table->integer('correct_answers');
-            $table->integer('incorrect_answers');
-            $table->integer('unanswered');
-            $table->decimal('score', 5, 2);
+            $table->integer('questions_count')->default(0);
+            $table->integer('correct_answers')->default(0);
+            $table->integer('incorrect_answers')->default(0);
+            $table->integer('unanswered')->default(0);
+            $table->decimal('score', 5, 2)->default(0);
             $table->enum('status', ['completed', 'ongoing', 'cancelled']); // Sesuaikan dengan status yang mungkin
             $table->timestamps();
 

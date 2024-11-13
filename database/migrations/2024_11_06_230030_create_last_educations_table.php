@@ -11,20 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('last_education', function (Blueprint $table) {
+        Schema::create('last_educations', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignId('teacher_id')->constrained('teachers')->onDelete('cascade');
             $table->string('name');
-            $table->string('institution');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('degree');
-            $table->string('field_of_study');
-            $table->decimal('gpa', 3, 2);
+            $table->string('institution')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('degree')->nullable();
+            $table->string('field_of_study')->nullable();
+            $table->decimal('gpa', 3, 2)->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
-
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('last_education');
+        Schema::dropIfExists('last_educations');
     }
 };

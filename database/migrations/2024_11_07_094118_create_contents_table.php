@@ -16,11 +16,10 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->string('name');
             $table->text('description');
-            $table->string('image_url');
             $table->boolean('is_random')->default(true);
             $table->boolean('is_active')->default(true);
-            $table->integer('min_value');
-            $table->integer('duration');
+            $table->integer('min_value')->default(0);
+            $table->integer('duration')->default(0);
             $table->string('next_step')->nullable();
             $table->timestamps();
         });

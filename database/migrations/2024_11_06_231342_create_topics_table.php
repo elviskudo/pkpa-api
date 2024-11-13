@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->uuid('course_id');
+            $table->foreign('course_id')->references('uuid')->on('courses')->onDelete('cascade');
             $table->string('name');
             $table->text('description');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->integer('order')->default(true);
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->integer('order')->default(1);
             $table->string('video_url')->nullable();
             $table->string('image_url')->nullable();
             $table->timestamps();

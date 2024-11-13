@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('university_id')->constrained('universities')->onDelete('cascade');
             $table->uuid('uuid')->unique();
+            $table->uuid('university_id');
+            $table->foreignId('university_id')->references('uuid')->on('universities')->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('birth_place')->nullable();
             $table->string('birth_date')->nullable();
-            $table->text('address');
+            $table->text('address')->nullable();
             $table->timestamps();
 
         });

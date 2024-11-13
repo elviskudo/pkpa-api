@@ -12,24 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('universities', function (Blueprint $table) {
-            $table->id(); // ID universitas
-            $table->uuid('uuid')->unique(); // UUID
-            $table->string('name'); // Nama universitas
-            $table->string('code')->unique(); // Kode universitas
-            $table->text('description')->nullable(); // Deskripsi universitas
-            $table->string('slug')->unique(); // Slug untuk URL
-            $table->string('image_url')->nullable(); // URL gambar
-            $table->string('logo_url')->nullable(); // URL logo
-            $table->string('certificate_url')->nullable(); // URL sertifikat
-            $table->string('brochure_url')->nullable(); // URL brosur
-            $table->text('vision')->nullable(); // Visi universitas
-            $table->text('mission')->nullable(); // Misi universitas
-            $table->text('goal')->nullable(); // Tujuan universitas
-            $table->text('candidate_agreement')->nullable(); // Kesepakatan kandidat
-            $table->text('core_pattern')->nullable(); // Pola inti
-            $table->boolean('is_active')->default(1); // Status aktif
-            $table->integer('order')->default(1); // Urutan
-            $table->timestamps(); // Timestamps untuk created_at dan updated_at
+            $table->id(); 
+            $table->uuid('uuid')->unique();
+            $table->string('name');
+            $table->string('code')->unique();
+            $table->text('description')->nullable();
+            $table->string('slug')->unique();
+            $table->string('image_url')->nullable();
+            $table->string('logo_url');
+            $table->string('certificate_url')->nullable();
+            $table->string('brochure_url')->nullable();
+            $table->text('vision')->nullable();
+            $table->text('mission')->nullable();
+            $table->text('goal')->nullable();
+            $table->text('candidate_agreement')->nullable();
+            $table->text('core_pattern')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->integer('order')->default(1);
+            $table->timestamps();
         });
     }
 
