@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('last_educations', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('teacher_id')->constrained('teachers')->onDelete('cascade');
+            $table->uuid('teacher_id');
+            $table->foreign('teacher_id')->references('uuid')->on('teachers')->onDelete('cascade');
             $table->string('name');
             $table->string('institution')->nullable();
             $table->date('start_date')->nullable();

@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LastEducation extends Model
 {
     protected $table = 'last_education';
 
     protected $fillable = [
+        'uuid',
         'teacher_id',
         'name',
         'institution',
@@ -21,8 +23,8 @@ class LastEducation extends Model
     ];
 
     // teacher relation
-    public function teacher()
+    public function teacher(): BelongsTo
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class,'teacher_id','uuid');
     }
 }

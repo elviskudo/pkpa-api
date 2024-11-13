@@ -12,6 +12,7 @@ class Topic extends Model
 {
     protected $fillable = [
         'uuid',
+        'course_id',
         'name',
         'description',
         'start_date',
@@ -23,9 +24,17 @@ class Topic extends Model
         'image_url'
     ];
 
-    //Batch Group relation
-    public function batchGroup(): HasOne
+    //Topic Relation
+    public function task(): HasMany
     {
-        return $this->hasOne(BatchGroup::class);
+        return $this->hasMany(Task::class,'task_id','uuid');
     }
+
+    //Batch Relation
+    public function batchGroup(): HasMany
+    {
+        return $this->hasMany(Batch::class,'topic_id','uuid');
+    }
+
+
 }

@@ -25,36 +25,18 @@ class Teacher extends Model
     //University Relation
     public function university(): BelongsTo
     {
-        return $this->belongsTo(University::class);
+        return $this->belongsTo(University::class,'university_id','uuid');
     }
 
     // Last Education Relation
     public function lastEducation(): HasOne
     {
-        return $this->hasOne(LastEducation::class);
+        return $this->hasOne(LastEducation::class,'teacher_id','uuid');
     }
 
     //Course Relation
     public function course(): HasMany
     {
-        return $this->hasMany(Course::class);
-    }
-
-    //Review Task relation
-    public function reviewedFiles():HasMany
-    {
-        return $this->hasMany(UploadFiles::class, 'reviewed_by');
-    }
-
-    //Approved Task relation
-    public function approvedFiles():HasMany
-    {
-        return $this->hasMany(UploadFiles::class, 'approved_by');
-    }
-
-    //Rejected Files relation
-    public function rejectedFiles():HasMany
-    {
-        return $this->hasMany(UploadFiles::class,'rejected_by');
+        return $this->hasMany(Course::class,'teacher_id','uuid');
     }
 }

@@ -24,18 +24,18 @@ class Student extends Model
     //University Relation
     public function university(): BelongsTo
     {
-        return $this->belongsTo(University::class);
+        return $this->belongsTo(University::class,'university_id','uuid');
     }
 
     //Quiz Result Relation
     public function quizResult(): HasOne
     {
-        return $this->hasOne(QuizResult::class);
+        return $this->hasOne(QuizResult::class,'student_id','uuid');
     }
 
-    //Task Relation
-    public function Task():HasMany
+    //Face Relation
+    public function student(): HasOne
     {
-        return $this->hasMany(Task::class);
+        return $this->hasOne(Face::class,'student_id','uuid');
     }
 }

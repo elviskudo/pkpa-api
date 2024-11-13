@@ -21,6 +21,6 @@ class Content extends Model
 
     public function quizByContent(): HasOne
     {
-        return $this->hasOne(QuizByContent::class);
+        return $this->hasOne(QuizByContent::class,'content_id','uuid');
     }
 }

@@ -17,13 +17,13 @@ class QuizByContent extends Model
         'is_active',
     ];
 
-    public function quiz():BelongsTo
+    public function content():BelongsTo
     {
-        return $this->belongsTo(Content::class);
+        return $this->belongsTo(Content::class,'content_id','uuid');
     }
 
     public function option():HasMany
     {
-        return $this->hasMany(Option::class);
+        return $this->hasMany(Option::class,'quiz_by_content_id','uuid');
     }
 }

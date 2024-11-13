@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
-class University extends Model
+    class University extends Model
 {
     protected $fillable = [
         'uuid',
@@ -34,24 +34,24 @@ class University extends Model
     // Teacher Relation
     public function teachers(): HasMany
     {
-        return $this->hasMany(Teacher::class);
+        return $this->hasMany(Teacher::class,'university_id','uuid');
     }
 
     // Course Relation
     public function course(): HasMany
     {
-        return $this->hasMany(Course::class);
+        return $this->hasMany(Course::class,'university_id','uuid');
     }
 
     //Student Relation
     public function student(): HasMany
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class,'university_id','uuid');
     }
 
     //Forum Topic Relation
     public function comments(): HasMany
     {
-        return $this->hasMany(ForumTopic::class, 'foreign_key', 'local_key');
+        return $this->hasMany(Forum::class, 'university_id', 'uuid');
     }
 }

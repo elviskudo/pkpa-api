@@ -16,16 +16,19 @@ class DetailQuizAnswer extends Model
         'result',
     ];
 
+    //Quiz Relation
     public function quiz(): HasOne
     {
         return $this->hasOne(Quiz::class,'quiz_id','uuid');
     }
 
+    //Question Relation
     public function question():HasOne
     {
         return $this->hasOne(Question::class,'question_id','uuid');
     }
 
+    //Answer Relation
     public function answer():HasOne
     {
         return $this->hasOne(Answer::class,'answer_id','uuid');

@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -44,5 +46,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    //Review Task relation
+    public function reviewedFiles():HasOne
+    {
+        return $this->hasOne(UploadFiles::class, 'reviewed_by','uuid');
+    }
+
+    //Approved Task relation
+    public function approvedFiles():HasOne
+    {
+        return $this->hasOne(UploadFiles::class, 'approved_by','uuid');
+    }
+
+    //Rejected Files relation
+    public function rejectedFiles():HasOne
+    {
+        return $this->hasOne(UploadFiles::class,'rejected_by','uuid');
+    }
+
+    //Comment Relation
+    public function user(): HasMany
+    {
+        return $this->hasMany(Comment::class,'created_by','uuid');
     }
 }
