@@ -10,41 +10,40 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Course extends Model
 {
-    protected $fillable =[
+    protected $fillable = [
         'uuid',
-        'university',
-        'teacher_id',
         'category_id',
         'name',
         'description',
-        'background_url',
+        'teacher_id',
+        'class_type',
+        'background_image',
+        'certificate_url',
         'guideline_url',
-        'accessed',
         'is_publish',
         'is_forum',
+        'order',
+        'university_id',
+        'topic_id'
     ];
 
-    //Category Relation
     public function category(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
 
-    //Teacher Relation
     public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
     }
 
-    //University Relation
     public function university(): BelongsTo
     {
         return $this->belongsTo(University::class);
     }
 
-    //Task Relation
-    public function task(): HasMany
+    public function topics()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Topic::class);
     }
 }
