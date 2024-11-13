@@ -42,7 +42,7 @@ class Course extends Model
         return $this->belongsTo(University::class);
     }
 
-    public function topics()
+    public function topic()
     {
         return $this->hasMany(Topic::class);
     }
