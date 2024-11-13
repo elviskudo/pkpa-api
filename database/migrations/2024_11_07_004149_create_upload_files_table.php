@@ -22,13 +22,13 @@ return new class extends Migration
             $table->string('file_type');
             $table->timestamp('uploaded_at')->nullable()->useCurrent();
             $table->uuid('reviewed_by')->nullable();
-            $table->foreign('reviewed_by')->references('uuid')->on('users')->nullable();
+            $table->foreign('reviewed_by')->references('uuid')->on('users');
             $table->timestamp('reviewed_at')->nullable();
             $table->uuid('approved_by')->nullable();
-            $table->foreign('approved_by')->references('uuid')->on('users')->nullable();
+            $table->foreign('approved_by')->references('uuid')->on('users');
             $table->timestamp('approved_at')->nullable();
             $table->uuid('rejected_by')->nullable();
-            $table->foreign('rejected_by')->references('uuid')->on('users')->nullable();
+            $table->foreign('rejected_by')->references('uuid')->on('users');
             $table->timestamp('rejected_at')->nullable();
             $table->timestamps();
         });
