@@ -11,23 +11,23 @@ class DetailQuizAnswer extends Model
     protected $fillable =[
         'uuid',
         'quiz_id',
-        'question',
+        'question_id',
         'answer_id',
         'result',
     ];
 
     public function quiz(): HasOne
     {
-        return $this->hasOne(Quiz::class);
+        return $this->hasOne(Quiz::class,'quiz_id','uuid');
     }
 
     public function question():HasOne
     {
-        return $this->hasOne(Question::class);
+        return $this->hasOne(Question::class,'question_id','uuid');
     }
 
     public function answer():HasOne
     {
-        return $this->hasOne(Answer::class);
+        return $this->hasOne(Answer::class,'answer_id','uuid');
     }
 }

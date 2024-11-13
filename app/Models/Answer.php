@@ -17,12 +17,12 @@ class Answer extends Model
     //Question Relation
     public function question():BelongsTo
     {
-        return $this->belongsTo(Question::class);
+        return $this->belongsTo(Question::class,'question_id','uuid');
     }
 
     //Detail Quiz Relation
     public function detailQuizAnswer():BelongsTo
     {
-        return $this->belongsTo(DetailQuizAnswer::class);
+        return $this->belongsTo(DetailQuizAnswer::class,'answer_id','uuid');
     }
 }

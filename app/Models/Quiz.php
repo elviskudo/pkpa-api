@@ -16,11 +16,11 @@ class Quiz extends Model
 
     public function question(): HasMany
     {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class,'quiz_id','uuid');
     }
 
     public function detailQuizAnswer(): BelongsTo
     {
-        return $this->belongsTo(DetailQuizAnswer::class);
+        return $this->belongsTo(DetailQuizAnswer::class,'quiz_id','uuid');
     }
 }

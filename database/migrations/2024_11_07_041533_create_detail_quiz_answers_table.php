@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('detail_quiz_answers', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('quiz_id')->constrained('quizzes')->onDelete('cascade');
-            $table->foreignId('question')->constrained('questions')->onDelete('cascade');
-            $table->foreignId('answer_id')->constrained('answers')->onDelete('cascade');
+            $table->uuid('quiz_id');
+            $table->foreign('quiz_id')->references('uuid')->on('quizzes')->onDelete('cascade');
+            $table->uuid('question_id');
+            $table->foreignId('question_id')->references('uuid')->on('questions')->onDelete('cascade');
+            $table->uuid('answer_id');
+            $table->foreignId('answer_id')->references('uuid')->on('answers')->onDelete('cascade');
             $table->boolean('result');
             $table->timestamps();
         });

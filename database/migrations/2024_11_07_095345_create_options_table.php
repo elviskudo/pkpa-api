@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('options', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('quiz_by_content_id')->constrained('quiz_by_content')->onDelete('cascade');
+            $table->uuid('quiz_by_content_id');
+            $table->foreign('quiz_by_content_id')->references('uuid')->on('quiz_by_contents')->onDelete('cascade');
             $table->string('option');
             $table->boolean('is_answered')->default(false);
             $table->timestamps();
