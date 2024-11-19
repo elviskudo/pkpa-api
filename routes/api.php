@@ -5,7 +5,7 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\Home\CourseController as HomeCourseController;
 use App\Http\Controllers\Admin\ForumController as AdminForumController;
 use App\Http\Controllers\Admin\UniversityController as AdminUniversityController;
-use App\Http\Controllers\FaceController;
+use App\Http\Controllers\Home\FaceController;
 
 Route::get('/', function () {
     return view('welcome to the PKPA API');
@@ -16,6 +16,8 @@ Route::prefix('auth')->name('auth.')->namespace('Auth')->group(function () {
 
 Route::prefix('home')->name('home.')->group(function () {
     Route::get('/course', [HomeCourseController::class, 'list']);
+    Route::get('/face',[FaceController::class,'list']);
+    Route::post('/face',[FaceController::class,'create']);
 });
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/universities', [AdminUniversityController::class, 'list']);
@@ -25,6 +27,3 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 Route::post('/upload', [UploadController::class, 'upload']);
 
-//Face Controller
-Route::get('/face',[FaceController::class,'list']);
-Route::post('/face',[FaceController::class,'create']);
