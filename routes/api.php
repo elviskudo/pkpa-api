@@ -17,8 +17,9 @@ Route::prefix('auth')->name('auth.')->namespace('Auth')->group(function () {
 Route::prefix('home')->name('home.')->group(function () {
     Route::get('/course', [HomeCourseController::class, 'list']);
     Route::get('/face',[FaceController::class,'list']);
-    Route::post('/face',[FaceController::class,'create']);
+    Route::post('/add-user',[FaceController::class,'create']);
 });
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/universities', [AdminUniversityController::class, 'list']);
     Route::get('/forums', [AdminForumController::class, 'list']);
