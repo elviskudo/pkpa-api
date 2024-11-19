@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\PaginateRequest;
 use App\Models\University;
+use Illuminate\Database\Eloquent\Model;
 
 class UniversityServices
 {
