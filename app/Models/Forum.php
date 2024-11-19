@@ -32,4 +32,10 @@ class Forum extends Model
     {
         return $this->belongsTo(University::class, 'university_id', 'uuid');
     }
+
+    //Comments Relation
+    public function forum(): HasMany
+    {
+        return $this->hasMany(Comment::class,'forum_id','uuid');
+    }
 }

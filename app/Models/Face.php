@@ -13,6 +13,7 @@ class Face extends Model
         'image_url',
     ];
 
+    //Student Relation
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class,'student_id','uuid');

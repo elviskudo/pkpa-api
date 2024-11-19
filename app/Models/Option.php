@@ -11,10 +11,12 @@ class Option extends Model
         'uuid',
         'quiz_by_content_id',
         'option',
+        'is_answered',
     ];
 
+    // QuizByContent Relation
     public function quizByContent():BelongsTo
     {
-        return $this->belongsTo(QuizByContent::class);
+        return $this->belongsTo(QuizByContent::class,'quiz_by_content_id','uuid');
     }
 }

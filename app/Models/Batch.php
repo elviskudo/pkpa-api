@@ -13,7 +13,7 @@ class Batch extends Model
 {
     protected $fillable = [
         'uuid',
-        'batch_groups_id',
+        'topic_id',
         'name',
         'description',
         'video_url',
@@ -26,6 +26,6 @@ class Batch extends Model
     //BatchGroup
     public function batchGroup(): BelongsTo
     {
-        return $this->belongsTo(BatchGroup::class);
+        return $this->belongsTo(Topic::class,'topic_id','uuid');
     }
 }

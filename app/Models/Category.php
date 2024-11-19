@@ -21,6 +21,6 @@ class Category extends Model
     //Course
     public function course():BelongsToMany
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class,'category_id','uuid');
     }
 }

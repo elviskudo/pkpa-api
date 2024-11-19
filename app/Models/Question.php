@@ -12,7 +12,8 @@ class Question extends Model
     protected $fillable = [
         'uuid',
         'quiz_id',
-        'text'
+        'text',
+        'type'
     ];
 
     public function quiz(): BelongsTo

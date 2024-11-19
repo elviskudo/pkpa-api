@@ -12,6 +12,8 @@ class Course extends Model
 {
     protected $fillable = [
         'uuid',
+        'university_id',
+        'teacher_id',
         'category_id',
         'name',
         'description',
@@ -29,7 +31,7 @@ class Course extends Model
 
     public function category(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class,'category_id','uuid');
     }
 
     public function teacher(): BelongsTo
@@ -42,7 +44,7 @@ class Course extends Model
         return $this->belongsTo(University::class, 'university_id', 'uuid');
     }
 
-    public function topic()
+    public function topic(): HasMany
     {
         return $this->hasMany(Topic::class, 'topic_id', 'uuid');
     }

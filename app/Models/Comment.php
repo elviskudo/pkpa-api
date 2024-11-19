@@ -12,30 +12,22 @@ class Comment extends Model
 {
     protected $fillable=[
         'uuid',
-        'user_id',
-        'topic_id',
+        'created_by',
+        'forum_id',
         'content',
         'like_count',
         'dislike_count',
     ];
 
-    /**
-     * Get the topic that owns the Comment
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function topic(): BelongsTo
+
+    public function forum(): BelongsTo
     {
-        return $this->belongsTo(topic::class);
+        return $this->belongsTo(Forum::class,'forum_id','uuid');
     }
 
-    /**
-     * Get the user that owns the Comment
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
+
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'created_by','uuid');
     }
 }

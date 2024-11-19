@@ -12,8 +12,7 @@ class Task extends Model
 {
     protected $fillable = [
         'uuid',
-        'course_id',
-        'student_id',
+        'topic_id',
         'name',
         'description',
         'start_date',
@@ -26,18 +25,6 @@ class Task extends Model
     //Course Relation
     public function course(): BelongsTo
     {
-        return $this->belongsTo(Course::class);
-    }
-
-    //Student Relation
-    public function student(): BelongsTo
-    {
-        return $this->belongsTo(Student::class);
-    }
-
-    //UploadFile Relation
-    public function uploadFiles(): HasMany
-    {
-        return $this->hasMany(UploadFiles::class);
+        return $this->belongsTo(Topic::class,'topic_id','uuid');
     }
 }
