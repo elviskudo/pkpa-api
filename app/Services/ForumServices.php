@@ -3,41 +3,42 @@
 namespace App\Services;
 
 use Illuminate\Http\Request;
-use App\Models\University;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Forum;
 
-class UniversityServices
+class ForumServices
 {
-    public $addressFilter = ['name', 'code'];
-
     /**
      * @throws Exception
      */
+
     public function list(Request $request)
     {
-        $model = University::all();
-
+        $model = Forum::all();
         return $model;
     }
 
+
     public function create($data)
     {
-        $model = University::create($data);
+        $model = Forum::create($data);
 
         return $model;
     }
 
     public function update($id, $data)
     {
-        $model = University::createOrUpdate($data, $id);
+        $model = Forum::findOrFail($id);
+        $model->update($data);
 
         return $model;
     }
 
     public function delete($id)
     {
-        $model = University::delete($id);
+        $model = Forum::findOrFail($id);
+        $model->delete();
 
         return $model;
     }
+
 }

@@ -20,6 +20,7 @@ Route::prefix('home')->name('home.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/universities', [AdminUniversityController::class, 'list']);
     Route::get('/forums', [AdminForumController::class, 'list']);
+    Route::post('/forums', [AdminForumController::class, 'create']);
     // Route::prefix('admin')->name('admin.')->middleware(['auth:jwt'])->group(function () {
 });
 Route::post('/upload', [UploadController::class, 'upload']);

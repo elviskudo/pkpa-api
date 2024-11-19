@@ -36,16 +36,16 @@ class Course extends Model
 
     public function teacher(): BelongsTo
     {
-        return $this->belongsTo(Teacher::class,'teacher_id','uuid');
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'uuid');
     }
 
     public function university(): BelongsTo
     {
-        return $this->belongsTo(University::class,'university_id','uuid');
+        return $this->belongsTo(University::class, 'university_id', 'uuid');
     }
 
     public function topic(): HasMany
     {
-        return $this->hasMany(Topic::class,'course_id','uuid');
+        return $this->hasMany(Topic::class, 'topic_id', 'uuid');
     }
 }

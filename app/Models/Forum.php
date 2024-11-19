@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Forum extends Model
 {
-    protected $fillable =[
+    protected $fillable = [
         'uuid',
         'created_by',
         'university_by',
@@ -24,13 +24,13 @@ class Forum extends Model
     //User Relation
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class,'created_by','uuid');
+        return $this->belongsTo(User::class, 'created_by', 'uuid');
     }
 
     //University Relation
     public function university(): BelongsTo
     {
-        return $this->belongsTo(University::class,'university_id','uuid');
+        return $this->belongsTo(University::class, 'university_id', 'uuid');
     }
 
     //Comments Relation
