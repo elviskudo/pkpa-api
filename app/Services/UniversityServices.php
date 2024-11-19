@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Http\Requests\PaginateRequest;
+use Illuminate\Http\Request;
 use App\Models\University;
 
 class UniversityServices
@@ -12,7 +12,7 @@ class UniversityServices
     /**
      * @throws Exception
      */
-    public function list(PaginateRequest $request)
+    public function list(Request $request)
     {
         $model = University::all();
 
@@ -26,14 +26,14 @@ class UniversityServices
         return $model;
     }
 
-    public function update ($id, $data)
+    public function update($id, $data)
     {
         $model = University::createOrUpdate($data, $id);
 
         return $model;
     }
 
-    public function delete ($id)
+    public function delete($id)
     {
         $model = University::delete($id);
 
