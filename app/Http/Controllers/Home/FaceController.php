@@ -18,12 +18,6 @@ class FaceController extends Controller
         $this->faceServices=$faceServices;
     }
 
-    //List Face
-    public function list(){
-        $faces = $this -> faceServices->list();
-        return response()->json($faces);
-    }
-
     //Create Face
     public function create(Request $request){
         $validate = $request->validate([
@@ -40,6 +34,9 @@ class FaceController extends Controller
         ]);
 
         return response()->json($face);
+    }
+
+    public function compare(){
 
     }
 

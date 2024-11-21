@@ -14,4 +14,17 @@ class FaceService {
         return $face;
     }
 
+    public function edit ($id,array $data){
+        $face = Face::find($id);
+
+        $face -> update($data);
+        return $face;
+    }
+
+    public function delete($id){
+        $face = Face::find($id);
+        $face -> delete();
+        return true;
+    }
+
 }
