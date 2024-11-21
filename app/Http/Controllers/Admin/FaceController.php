@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Services\FaceService;
 use Illuminate\Http\Request;
 
@@ -23,23 +24,21 @@ class FaceController extends Controller
         return response()->json($faces);
     }
 
-    //Create Face
-    public function create(Request $request){
-        $validate = $request->validate([
-            'uuid'=> 'required|uuid',
-            'student_id' => 'required|uuid|exists:students,uid',
+    //Edit Face
+    public function edit(Request $request, $id){
+        $validateData = $request -> validate([
+            'uuid' => 'required|string',
+             'student_id' => 'required|uuid|exists:students,uid',
             'image_url'=>'required|string|max:225'
         ]);
-
-        //Kirim Ke FaceService
-        $face = $this->faceServices->create([
-            'uuid'=> $validate['uuid'],
-            'student_id'=> $validate['student_id'],
-            'image_url' => $validate['image_url']
-        ]);
-
+        
+        $face = $this ->faceServices->edit($id,$validateData);
         return response()->json($face);
-
     }
 
+    //Delete Face
+    public function delete($id){
+        $this->faceServices->delete($id);
+        return response()->json(['message' => 'Data Telah Berhasil di Hapus.']);
+    }
 }
