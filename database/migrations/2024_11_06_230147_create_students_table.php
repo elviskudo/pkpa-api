@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->uuid('university_id');
-            $table->foreignId('university_id')->references('uuid')->on('universities')->onDelete('cascade');
+            // $table->foreignId('university_id')->references('uuid')->on('universities')->onDelete('cascade');
+            $table->foreign('university_id')->references('uuid')->on('universities')->onDelete('cascade');                                                  
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone');
