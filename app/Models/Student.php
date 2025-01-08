@@ -34,7 +34,7 @@ class Student extends Model
     }
 
     //Face Relation
-    public function student(): HasOne
+    public function face(): HasOne
     {
         return $this->hasOne(Face::class,'student_id','uuid');
     }

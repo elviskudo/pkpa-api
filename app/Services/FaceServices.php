@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\Face;
 
-class FaceService {
+class FaceServices {
     public function list(){
         $model = Face::all();
         return $model;
