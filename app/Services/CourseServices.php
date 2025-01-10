@@ -7,7 +7,7 @@ use App\Models\Course;
 
 class CourseServices
 {
-    public $courseFilter = ['name', 'category_id'];
+    public $courseFilter = ['name', 'category_id', 'university_id', 'teacher_id'];
 
     /**
      * @throws Exception
@@ -18,6 +18,14 @@ class CourseServices
 
         if ($request->category_id) {
             $query->where('category_id', $request->category_id);
+        }
+
+        if ($request->has('university_id') && $request->university_id != '') {
+            $query->where('university_id', $request->university_id);
+        }
+
+        if ($request->has('teacher_id') && $request->teacher_id != '') {
+            $query->where('teacher_id', $request->teacher_id);
         }
 
         if ($request->has('name')) {

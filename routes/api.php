@@ -5,12 +5,11 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\Home\CourseController as HomeCourseController;
 use App\Http\Controllers\Admin\ForumController as AdminForumController;
 use App\Http\Controllers\Admin\UniversityController as AdminUniversityController;
-<<<<<<< HEAD
 use App\Http\Controllers\Api\AuthController;
-=======
 use App\Http\Controllers\Home\FaceController as HomeFaceController;
 use App\Http\Controllers\Admin\FaceController as AdminFaceController;
->>>>>>> d9109c2592261f307928de2b9d54a6c873ca3d1c
+use App\Http\Controllers\Admin\CourseController as AdminCourseController;
+use App\Http\Controllers\Admin\StudentController;
 
 Route::get('/', function () {
     return view('welcome to the PKPA API');
@@ -38,8 +37,6 @@ Route::prefix('home')->name('home.')->group(function () {
     Route::get('/course', [HomeCourseController::class, 'list']);
     Route::post('/add-user',[HomeFaceController::class,'create']);
 });
-<<<<<<< HEAD
-=======
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/universities', [AdminUniversityController::class, 'list']);
@@ -48,10 +45,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/face',[AdminFaceController::class,'list']);
     Route::put('/edit-face',[AdminFaceController::class,'edit']);
     Route::delete('/delete-face',[AdminFaceController::class,'delete']);
+    Route::get('/courses', [AdminCourseController::class, 'list']);
+    Route::post('/courses', [AdminCourseController::class, 'create']);
+    Route::put('/courses/{id}', [AdminCourseController::class, 'update']);
+    Route::get('/students', [StudentController::class, 'list']);
+    Route::post('/students', [StudentController::class, 'create']);
+    Route::put('/students/{id}', [StudentController::class, 'update']);
+    Route::delete('/students/{id}', [StudentController::class, 'delete']);
     // Route::prefix('admin')->name('admin.')->middleware(['auth:jwt'])->group(function () {
 });
-Route::post('/upload', [UploadController::class, 'upload']);
->>>>>>> d9109c2592261f307928de2b9d54a6c873ca3d1c
-
 
 Route::post('/upload', [UploadController::class, 'upload']);
