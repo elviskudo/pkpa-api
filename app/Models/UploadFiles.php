@@ -26,20 +26,25 @@ class UploadFiles extends Model
     ];
 
     //Review Task relation
-    public function reviewedFiles():BelongsTo
+    public function reviewedFiles(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'reviewed_by','uuid');
+        return $this->belongsTo(User::class, 'reviewed_by', 'uuid');
     }
 
     //Approved Task relation
-    public function approvedFiles():BelongsTo
+    public function approvedFiles(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'approved_by','uuid');
+        return $this->belongsTo(User::class, 'approved_by', 'uuid');
     }
 
     //Rejected Files relation
-    public function rejectedFiles():BelongsTo
+    public function rejectedFiles(): BelongsTo
     {
-        return $this->belongsTo(User::class,'rejected_by','uuid');
+        return $this->belongsTo(User::class, 'rejected_by', 'uuid');
+    }
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class, 'relation_id', 'uuid')
+            ->where('upload_files.model', 'App\\Models\\Batch');
     }
 }

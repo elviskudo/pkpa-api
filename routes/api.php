@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BatchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\Home\CourseController as HomeCourseController;
@@ -11,6 +12,8 @@ use App\Http\Controllers\Admin\FaceController as AdminFaceController;
 
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\TopicController;
+use App\Http\Controllers\Admin\UploadFilesController;
 
 Route::get('/', function () {
     return view('welcome to the PKPA API');
@@ -48,8 +51,27 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/edit-face',[AdminFaceController::class,'edit']);
     Route::delete('/delete-face',[AdminFaceController::class,'delete']);
     Route::get('/courses', [AdminCourseController::class, 'list']);
-    Route::post('/courses', [AdminCourseController::class, 'create']);
+    Route::post('/courses', [AdminCourseController::class, 'store']);
     Route::put('/courses/{id}', [AdminCourseController::class, 'update']);
+    // -- ROUTES UNTUK TOPIC --
+    Route::prefix('topics')->group(function () {
+        Route::get('/', [TopicController::class, 'list']);
+        Route::post('/', [TopicController::class, 'store']);
+        Route::put('/{id}', [TopicController::class, 'update']);
+        Route::delete('/{id}', [TopicController::class, 'destroy']);
+    });
+    Route::prefix('batches')->group(function () {
+        Route::get('/', [BatchController::class, 'list']);
+        Route::post('/', [BatchController::class, 'store']);
+        Route::put('/{id}', [BatchController::class, 'update']);
+        Route::delete('/{id}', [BatchController::class, 'destroy']);
+    });
+    Route::prefix('upload-files')->group(function () {
+        Route::get('/', [UploadFilesController::class, 'list']);
+        Route::post('/', [UploadFilesController::class, 'store']);
+        Route::put('/{id}', [UploadFilesController::class, 'update']);
+        Route::delete('/{id}', [UploadFilesController::class, 'destroy']);
+    });
     Route::get('/students', [StudentController::class, 'list']);
     Route::post('/students', [StudentController::class, 'create']);
     Route::put('/students/{id}', [StudentController::class, 'update']);

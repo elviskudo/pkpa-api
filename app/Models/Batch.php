@@ -28,4 +28,9 @@ class Batch extends Model
     {
         return $this->belongsTo(Topic::class,'topic_id','uuid');
     }
+    public function files(): HasMany
+    {
+        return $this->hasMany(UploadFiles::class, 'relation_id', 'uuid')
+                    ->where('model', 'App\\Models\\Batch');
+    }
 }
