@@ -33,6 +33,7 @@ Route::group([
 // Group untuk admin routes
 Route::prefix('admin')->name('admin.')->middleware(['auth:api'])->group(function () {
     Route::get('/universities', [AdminUniversityController::class, 'list']);
+    Route::post('/universities/create', [AdminUniversityController::class, 'create']);
     Route::get('/forums', [AdminForumController::class, 'list']);
     Route::post('/forums', [AdminForumController::class, 'create']);
 });
@@ -45,6 +46,8 @@ Route::prefix('home')->name('home.')->group(function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/universities', [AdminUniversityController::class, 'list']);
+    Route::post('/universities/create', [AdminUniversityController::class, 'create']);
+    Route::put('/universities/update/{id}', [AdminUniversityController::class, 'update']);
     Route::get('/forums', [AdminForumController::class, 'list']);
     Route::post('/forums', [AdminForumController::class, 'create']);
     Route::get('/face',[AdminFaceController::class,'list']);
