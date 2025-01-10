@@ -17,9 +17,9 @@ return new class extends Migration
             $table->uuid('quiz_id');
             $table->foreign('quiz_id')->references('uuid')->on('quizzes')->onDelete('cascade');
             $table->uuid('question_id');
-            $table->foreignId('question_id')->references('uuid')->on('questions')->onDelete('cascade');
+            $table->foreign('question_id')->references('uuid')->on('questions')->onDelete('cascade');
             $table->uuid('answer_id');
-            $table->foreignId('answer_id')->references('uuid')->on('answers')->onDelete('cascade');
+            $table->foreign('answer_id')->references('uuid')->on('answers')->onDelete('cascade');
             $table->boolean('result');
             $table->timestamps();
         });

@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\FaceService;
+use App\Services\FaceServices;
 use Illuminate\Http\Request;
 
 
 class FaceController extends Controller
 {
     //Constructor
-    public FaceService $faceServices;
+    public FaceServices $faceServices;
 
-    public function __construct(FaceService $faceServices)
+    public function __construct(FaceServices $faceServices)
     {
-        parent::__construct();
         $this->faceServices=$faceServices;
     }
 
@@ -31,7 +30,7 @@ class FaceController extends Controller
              'student_id' => 'required|uuid|exists:students,uid',
             'image_url'=>'required|string|max:225'
         ]);
-        
+
         $face = $this ->faceServices->edit($id,$validateData);
         return response()->json($face);
     }

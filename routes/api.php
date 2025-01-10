@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UniversityController as AdminUniversityController
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Home\FaceController as HomeFaceController;
 use App\Http\Controllers\Admin\FaceController as AdminFaceController;
+
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\StudentController;
 
@@ -34,15 +35,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth:api'])->group(function
 });
 
 Route::prefix('home')->name('home.')->group(function () {
-    Route::get('/course', [HomeCourseController::class, 'list']);
-    Route::post('/add-user',[HomeFaceController::class,'create']);
+    Route::get('/compare/{email}', [HomeFaceController::class, 'compare']);
+    Route::post('/create',[HomeFaceController::class,'create']);
 });
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/universities', [AdminUniversityController::class, 'list']);
     Route::get('/forums', [AdminForumController::class, 'list']);
     Route::post('/forums', [AdminForumController::class, 'create']);
-    Route::post('/face',[AdminFaceController::class,'list']);
+    Route::get('/face',[AdminFaceController::class,'list']);
     Route::put('/edit-face',[AdminFaceController::class,'edit']);
     Route::delete('/delete-face',[AdminFaceController::class,'delete']);
     Route::get('/courses', [AdminCourseController::class, 'list']);
@@ -54,5 +56,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/students/{id}', [StudentController::class, 'delete']);
     // Route::prefix('admin')->name('admin.')->middleware(['auth:jwt'])->group(function () {
 });
+Route::post('/upload', [UploadController::class, 'upload']);
+
+
 
 Route::post('/upload', [UploadController::class, 'upload']);
