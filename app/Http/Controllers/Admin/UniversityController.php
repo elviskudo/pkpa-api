@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\UniversityServices;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class UniversityController extends Controller
@@ -20,7 +22,17 @@ class UniversityController extends Controller
     {
         $universities = $this->universityServices->list($request);
 
-        return response()->json($universities, 200);
+        return response()->json($universities->map(function ($university) {
+            return [
+                'id' => $university->id,
+                'uuid' => $university->uuid,
+                'name' => $university->name,
+                'code' => $university->code,
+                'logo_url' => Storage::url($university->logo_url),
+                'is_active' => $university->is_active,
+                'order' => $university->order,
+            ];
+        }), 200);
     }
 
     public function create(Request $request)
@@ -31,17 +43,35 @@ class UniversityController extends Controller
             'deskripsi' => 'nullable|string',
             'persyaratanCalon' => 'nullable|string',
             'polaIlmiah' => 'nullable|string',
-            'logo' => 'nullable|image|mimes:jpg,png|',
-            'brosur' => 'nullable|file|mimes:pdf|',
+            'logo' => 'nullable|image|mimes:jpg,png|required|max:2048',
+            'brosur' => 'nullable|file|mimes:pdf|required|max:10240',
         ]);
 
-        // Handle file uploads
+        $data['uuid'] = Str::uuid();
+
+        $data['name'] = $data['namaUniversitas'];
+        $data['code'] = $data['kodeUniversitas'];
+        $data['description'] = $data['deskripsi'];
+        $data['candidate_agreement'] = $data['persyaratanCalon'];
+        $data['core_pattern'] = $data['polaIlmiah'];
+
+        $data['slug'] = Str::slug($data['name']);
+
+        unset(
+            $data['namaUniversitas'], $data['kodeUniversitas'],
+            $data['deskripsi'], $data['persyaratanCalon'], $data['polaIlmiah']
+        );
+
+        Log::info('Mapped Data for Create:', $data);
+
+        
         if ($request->hasFile('logo')) {
-            $data['logo_path'] = $request->file('logo')->store('logos', 'public');
+            $data['logo_url'] = $request->file('logo')->store('logos', 'public');
         }
 
-        if ($request->hasFile('brochure')) {
-            $data['brochure_path'] = $request->file('brochure')->store('brochures', 'public');
+        
+        if ($request->hasFile('brosur')) {
+            $data['brochure_url'] = $request->file('brosur')->store('brochures', 'public');
         }
 
         $university = $this->universityServices->create($data);
@@ -52,16 +82,16 @@ class UniversityController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'code' => "sometimes|required|string|max:50|unique:universities,code,$id",
-            'description' => 'nullable|string',
-            'requirements' => 'nullable|string',
-            'scientific_pattern' => 'nullable|string',
-            'logo' => 'nullable|image|mimes:jpg,png|',
-            'brochure' => 'nullable|file|mimes:pdf|',
+            'namaUniversitas' => 'required|string|max:255',
+            'kodeUniversitas' => "required|string|max:50|$id",
+            'deskripsi' => 'nullable|string',
+            'persyaratanCalon' => 'nullable|string',
+            'polaIlmiah' => 'nullable|string',
+            'logo' => 'nullable|image|mimes:jpg,png|required|max:2048',
+            'brosur' => 'nullable|file|mimes:pdf|required|max:10240',
         ]);
 
-        // Handle file uploads
+        
         if ($request->hasFile('logo')) {
             $data['logo_path'] = $request->file('logo')->store('logos', 'public');
         }
